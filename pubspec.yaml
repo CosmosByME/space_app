@@ -1,0 +1,45 @@
+name: space_app
+description: "A new Flutter project."
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  flutter_svg: ^2.2.3
+
+  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
+  image_picker: ^1.2.1
+  bloc: ^9.2.0
+  flutter_bloc: ^9.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+ 
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_28pt-Regular.ttf
+        - asset: assets/fonts/Inter_28pt-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter_28pt-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter_28pt-SemiBold.ttf
+          weight: 600
+  
