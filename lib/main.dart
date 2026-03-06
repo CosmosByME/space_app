@@ -54,6 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
               await Future.delayed(const Duration(seconds: 1));
             },
             child: PageView(
+              onPageChanged: (index) {
+                context.read<PageIndexCubit>().changeIndex(index);
+              },
               controller: pageController,
               children: [
                 FeedPage(),

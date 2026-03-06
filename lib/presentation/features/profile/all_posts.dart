@@ -9,7 +9,7 @@ class AllPosts extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: EdgeInsets.zero,
-      itemCount: 10,
+      itemCount: 7,
       itemBuilder: (context, index) {
         return AppPost(image: images[index]);
       },

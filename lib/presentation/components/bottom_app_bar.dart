@@ -17,11 +17,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
     final index = context.read<PageIndexCubit>().state;
     return BlocConsumer<PageIndexCubit, int>(
       listener: (context, state) {
-        widget.pageController.animateToPage(
-          state,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
+        widget.pageController.jumpToPage(state);
       },
       builder: (context, state) {
         return BottomAppBar(
