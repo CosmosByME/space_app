@@ -26,34 +26,31 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.zero,
-      child: Column(
-        children: [
-          // Sub-tab bar: General / Account / Logout
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 4),
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildSubTab("General", 0),
-                _buildSubTab("Account", 1),
-                _buildSubTab("Logout", 2),
-              ],
-            ),
+    return Column(
+      children: [
+        // Sub-tab bar: General / Account / Logout
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
           ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSubTab("General", 0),
+              _buildSubTab("Account", 1),
+              _buildSubTab("Logout", 2),
+            ],
+          ),
+        ),
 
-          // Tab content
-          if (selectedTab == 0) _buildGeneralTab(),
-          if (selectedTab == 1) _buildAccountTab(),
-          if (selectedTab == 2) _buildLogoutTab(),
-        ],
-      ),
+        // Tab content
+        if (selectedTab == 0) _buildGeneralTab(),
+        if (selectedTab == 1) _buildAccountTab(),
+        if (selectedTab == 2) _buildLogoutTab(),
+      ],
     );
   }
 

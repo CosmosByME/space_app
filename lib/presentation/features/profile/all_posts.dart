@@ -7,8 +7,7 @@ class AllPosts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
+    return SliverList.builder(
       itemCount: 7,
       itemBuilder: (context, index) {
         return AppPost(image: images[index]);

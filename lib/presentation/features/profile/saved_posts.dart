@@ -7,8 +7,7 @@ class SavedPosts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
+    return SliverList.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
         return AppPost(image: images[(index % 4 + 1) % images.length]);

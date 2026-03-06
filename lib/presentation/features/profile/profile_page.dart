@@ -58,32 +58,62 @@ class _ProfilePageState extends State<ProfilePage> {
           }
         },
         builder: (context, currentIndex) {
-          return Column(
-            children: [
-              // FIX 2: Replace CustomScrollView/SliverFillRemaining with a Column
-              // so the PageView gets a proper bounded height without layout conflicts.
-              ProfileInfo(),
-
-              // Pinned Tab Bar
-              _TabBar(
-                currentIndex: currentIndex,
-                onTap: (index) {
-                  context.read<ProfileOptionCubit>().changeOption(index);
-                },
-              ),
-
-              // FIX 3: Expanded gives PageView a bounded height inside the Column.
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (index) {
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: Colors.transparent,
+                stretch: true,
+                pinned: true,
+                expandedHeight: 230,
+                toolbarHeight: 0,
+                flexibleSpace: const FlexibleSpaceBar(
+                  background: ProfileInfo(),
+                  stretchModes: [
+                    StretchMode.zoomBackground,
+                    StretchMode.fadeTitle,
+                    StretchMode.blurBackground,
+                  ],
+                ),
+                bottom: _TabBar(
+                  currentIndex: currentIndex,
+                  onTap: (index) {
                     context.read<ProfileOptionCubit>().changeOption(index);
                   },
-                  children: const [AllPosts(), SavedPosts(), ProfileUpdate()],
                 ),
               ),
+              currentIndex == 0
+                  ? AllPosts()
+                  : currentIndex == 1
+                  ? SavedPosts()
+                  : SliverToBoxAdapter(child: ProfileUpdate()),
             ],
           );
+          // return Column(
+          //   children: [
+          //     // FIX 2: Replace CustomScrollView/SliverFillRemaining with a Column
+          //     // so the PageView gets a proper bounded height without layout conflicts.
+          //     ProfileInfo(),
+
+          //     // Pinned Tab Bar
+          //     _TabBar(
+          //       currentIndex: currentIndex,
+          //       onTap: (index) {
+          //         context.read<ProfileOptionCubit>().changeOption(index);
+          //       },
+          //     ),
+
+          //     // FIX 3: Expanded gives PageView a bounded height inside the Column.
+          //     Expanded(
+          //       child: PageView(
+          //         controller: _pageController,
+          //         onPageChanged: (index) {
+          //           context.read<ProfileOptionCubit>().changeOption(index);
+          //         },
+          //         children: const [AllPosts(), SavedPosts(), ProfileUpdate()],
+          //       ),
+          //     ),
+          //   ],
+          // );
         },
       ),
     );
@@ -91,11 +121,14 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 /// Extracted tab bar as a proper StatelessWidget (no SliverDelegate needed).
-class _TabBar extends StatelessWidget {
+class _TabBar extends StatelessWidget implements PreferredSizeWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
   const _TabBar({required this.currentIndex, required this.onTap});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
 
   @override
   Widget build(BuildContext context) {
