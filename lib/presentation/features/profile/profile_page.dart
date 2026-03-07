@@ -138,8 +138,14 @@ class _TabBar extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: AppColors.neutralB100, width: 0.5),
+          ),
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

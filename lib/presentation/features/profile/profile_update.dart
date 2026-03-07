@@ -162,7 +162,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           // Bio
           TextField(
             controller: bioController,
-            maxLines: 4,
+            maxLines: 5,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
