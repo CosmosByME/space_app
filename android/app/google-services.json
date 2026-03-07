@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "44912727159",
+    "project_id": "stellarhub-3ea81",
+    "storage_bucket": "stellarhub-3ea81.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44912727159:android:d2a532f89c7394ef326272",
+        "android_client_info": {
+          "package_name": "com.example.space_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44912727159-67a9cik6hm6peu5eojdmp2ti3e60n8ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU5zgIvurhg8fQpMgjmNbLy8aiapOxm2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44912727159-67a9cik6hm6peu5eojdmp2ti3e60n8ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
