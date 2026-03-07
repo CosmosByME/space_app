@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:space_app/data/services/page_index_cubit/cubit/page_index_cubit.dart';
 import 'package:space_app/presentation/components/app_bar.dart';
 import 'package:space_app/presentation/components/bottom_app_bar.dart';
+import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
 import 'package:space_app/presentation/features/feed/feed_page.dart';
 import 'package:space_app/presentation/features/notifications/notification_page.dart';
 import 'package:space_app/presentation/features/profile/cubit/profile_option_cubit.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       home: BlocProvider(
         create: (context) => PageIndexCubit(),
-        child: const MyHomePage(title: 'Flutter Demo Home Page'),
+        child: SignUpPage(),
       ),
     );
   }
