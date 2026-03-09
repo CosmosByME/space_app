@@ -16,7 +16,7 @@ Future<bool> handleLoginAction(
       TokenService.writeToken(response);
       return true;
     } else {
-      showErrorSnackBar(context, "Failed to login");
+      showErrorSnackBar(context, "Email or password is incorrect");
       return false;
     }
   }
