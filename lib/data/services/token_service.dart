@@ -22,4 +22,13 @@ class TokenService {
       rethrow;
     }
   }
+
+  static void deleteToken() async {
+    try {
+      await storage.remove("uid");
+    } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
 }

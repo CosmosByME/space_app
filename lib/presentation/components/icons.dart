@@ -182,4 +182,25 @@ class AppIcons {
     width: 22,
     colorFilter: ColorFilter.mode(AppColors.neutralB300, BlendMode.srcIn),
   );
+
+  static SvgPicture get infoIconWhite => SvgPicture.asset(
+    info,
+    height: 22,
+    width: 22,
+    colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  );
+
+  static SvgPicture get alertIconWhite => SvgPicture.asset(
+    alert,
+    height: 22,
+    width: 22,
+    colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  );
+
+  static SvgPicture get checkIconWhite => SvgPicture.asset(
+    check,
+    height: 22,
+    width: 22,
+    colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  );
 }

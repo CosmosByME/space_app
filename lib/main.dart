@@ -1,8 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:space_app/data/services/page_index_cubit/cubit/page_index_cubit.dart';
+import 'package:space_app/firebase_options.dart';
 import 'package:space_app/presentation/components/app_bar.dart';
 import 'package:space_app/presentation/components/bottom_app_bar.dart';
 import 'package:space_app/presentation/features/auth/login/login_page.dart';
+// import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
 import 'package:space_app/presentation/features/feed/feed_page.dart';
 import 'package:space_app/presentation/features/notifications/notification_page.dart';
 import 'package:space_app/presentation/features/profile/cubit/profile_option_cubit.dart';
@@ -11,7 +14,9 @@ import 'package:space_app/presentation/features/search/search_page.dart';
 import 'package:space_app/presentation/theme/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

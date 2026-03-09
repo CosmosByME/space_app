@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:space_app/presentation/components/app_bar.dart';
+import 'package:space_app/presentation/components/custom_password_field.dart';
 import 'package:space_app/presentation/components/custom_text_field.dart';
 import 'package:space_app/presentation/components/icons.dart';
 import 'package:space_app/presentation/components/other_method_button.dart';
+import 'package:space_app/presentation/components/snack_bars.dart';
+import 'package:space_app/presentation/features/auth/sign_up/sign_up_action.dart';
 import 'package:space_app/presentation/theme/colors.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -18,6 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isAgree = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +35,26 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
-                  OtherMethodsButton(
-                    icon: AppIcons.googleIcon,
-                    text: "Sign up with Google",
+                  InkWell(
+                    onTap: () {
+                      showWarningSnackBar(
+                        context,
+                        "This service is not available yet.",
+                      );
+                    },
+                    child: OtherMethodsButton(
+                      icon: AppIcons.googleIcon,
+                      text: "Sign up with Google",
+                    ),
                   ),
-                  OtherMethodsButton(
-                    icon: AppIcons.emailIcon,
-                    text: "Log in with Email",
+                  InkWell(
+                    onTap: () {
+                      //Navigate to login Page
+                    },
+                    child: OtherMethodsButton(
+                      icon: AppIcons.emailIcon,
+                      text: "Log in with Email",
+                    ),
                   ),
                 ],
               ),
@@ -91,7 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _usernameController,
                     text: "Username",
                   ),
-                  CustomTextField(
+                  CustomPasswordField(
                     controller: _passwordController,
                     text: "Password",
                   ),
@@ -124,16 +141,45 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           SliverToBoxAdapter(child: SizedBox(height: 26)),
           SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                color: AppColors.neutralB900,
-                borderRadius: BorderRadius.circular(6),
+            child: InkWell(
+              onTap: isAgree
+                  ? () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await handleSignUpAction(
+                        context,
+                        _nameController.text.trim(),
+                        _emailController.text.trim(),
+                        _usernameController.text.trim(),
+                        _passwordController.text.trim(),
+                      );
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  : null,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: isAgree
+                      ? AppColors.neutralB900
+                      : AppColors.neutralB100,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                alignment: Alignment.center,
+                child: isLoading
+                    ? SizedBox.square(
+                        dimension: 25,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 4,
+                        ),
+                      )
+                    : Text("Continue", style: TextStyle(color: Colors.white)),
               ),
-              alignment: Alignment.center,
-              child: Text("Continue", style: TextStyle(color: Colors.white)),
             ),
           ),
           SliverToBoxAdapter(
@@ -145,7 +191,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   Text("Have an account? "),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //Navigate to login Page
+                    },
                     child: Text(
                       "Log In",
                       style: TextStyle(
