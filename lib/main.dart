@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:space_app/data/services/page_index_cubit/cubit/page_index_cubit.dart';
+import 'package:space_app/presentation/features/home/page_index_cubit.dart';
 import 'package:space_app/firebase_options.dart';
 import 'package:space_app/presentation/components/app_bar.dart';
 import 'package:space_app/presentation/components/bottom_app_bar.dart';

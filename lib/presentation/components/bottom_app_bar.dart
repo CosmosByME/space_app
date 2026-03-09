@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_app/data/services/page_index_cubit/cubit/page_index_cubit.dart';
+import 'package:space_app/presentation/features/home/page_index_cubit.dart';
 import 'package:space_app/presentation/components/icons.dart';
 
 class CustomBottomAppBar extends StatefulWidget {

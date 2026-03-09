@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:space_app/data/services/token_service.dart';
 
 class AuthService {
-  static final auth = FirebaseAuth.instance;
+  static final _auth = FirebaseAuth.instance;
 
   static Future<String?> signInEmail(String email, String password) async {
     try {
-      final responce = await auth.signInWithEmailAndPassword(
+      final responce = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -20,7 +20,7 @@ class AuthService {
 
   static Future<String?> signUpEmail(String email, String password) async {
     try {
-      final responce = await auth.createUserWithEmailAndPassword(
+      final responce = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -32,7 +32,7 @@ class AuthService {
   }
 
   static void logOut() async {
-    await auth.signOut();
+    await _auth.signOut();
     TokenService.deleteToken();
   }
 }

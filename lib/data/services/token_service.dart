@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenService {
-  static final storage = SharedPreferencesAsync();
+  static final _storage = SharedPreferencesAsync();
 
   static Future<String> readToken() async {
     try {
-      final responce = await storage.getString("uid");
+      final responce = await _storage.getString("uid");
       return responce!;
     } catch (e) {
       debugPrint(e.toString());
@@ -16,7 +16,7 @@ class TokenService {
 
   static void writeToken(String token) async {
     try {
-      await storage.setString("uid", token);
+      await _storage.setString("uid", token);
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
@@ -25,7 +25,7 @@ class TokenService {
 
   static void deleteToken() async {
     try {
-      await storage.remove("uid");
+      await _storage.remove("uid");
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
