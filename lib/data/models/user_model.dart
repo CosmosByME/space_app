@@ -1,4 +1,5 @@
-import 'package:space_app/data/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:space_app/domain/models/user.dart';
 
 class UserModel extends User {
   const UserModel({
@@ -26,6 +27,23 @@ class UserModel extends User {
       followingCount: json['followingCount'] as int,
       postsCount: json['postsCount'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      uid: map['uid'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      email: map['email'] as String? ?? '',
+      username: map['username'] as String? ?? '',
+      bio: map['bio'] as String? ?? '',
+      profileImageUrl: map['profileImageUrl'] as String? ?? '',
+      followersCount: map['followersCount'] as int? ?? 0,
+      followingCount: map['followingCount'] as int? ?? 0,
+      postsCount: map['postsCount'] as int? ?? 0,
+      createdAt: map['createdAt'] is Timestamp
+          ? (map['createdAt'] as Timestamp).toDate()
+          : DateTime.now(),
     );
   }
 

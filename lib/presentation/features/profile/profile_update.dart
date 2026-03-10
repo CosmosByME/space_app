@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_app/data/services/img_picker_service.dart';
+import 'package:space_app/domain/services/img_picker_service.dart';
+import 'package:space_app/domain/services/supabase_storage_service.dart';
 import 'package:space_app/presentation/components/icons.dart';
+import 'package:space_app/presentation/components/snack_bars.dart';
 import 'package:space_app/presentation/features/profile/cubit/cubit/user_cubit.dart';
 import 'package:space_app/presentation/theme/colors.dart';
 
@@ -17,7 +19,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   TextEditingController nameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
-  late File file;
+  File? file;
+  String path = "";
   int selectedTab = 0;
 
   @override
@@ -95,32 +98,89 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
         children: [
           // Avatar upload
           GestureDetector(
-            onTap: () {
-              ImgPickerService.pickImage().then((value) {
-                file = value!;
+            onTap: () async {
+              final file1 = await ImgPickerService.pickImage();
+              setState(() {
+                file = file1;
               });
             },
-            child: Container(
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.only(bottom: 16),
-              decoration: BoxDecoration(
-                color: AppColors.primaryB100,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.neutralW400, width: 1),
-              ),
-              child: Row(
-                children: [
-                  AppIcons.uploadIcon,
-                  SizedBox(width: 12),
-                  Text(
-                    "Choose an image for avatar",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.neutralB500,
+            child: file == null
+                ? Container(
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryB100,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.neutralW400,
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        AppIcons.uploadIcon,
+                        SizedBox(width: 12),
+                        Text(
+                          "Choose an image for avatar",
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppColors.neutralB500),
+                        ),
+                      ],
+                    ),
+                  )
+                : Container(
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryB100,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.neutralW400,
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: FileImage(file!),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    file = null;
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.neutralW400,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Icon(
+                                    Icons.close_rounded,
+                                    color: AppColors.neutralB900,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(child: SizedBox()),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
           ),
           // Full name
           TextField(
@@ -173,7 +233,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           // Bio
           TextField(
             controller: bioController,
-            maxLines: 5,
+            maxLines: 3,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -207,14 +267,22 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               ),
             ),
             onPressed: () async {
+              if (file != null) {
+                path = await SupabaseStorageService.uploadUserImage(file!);
+              }
               final user = context.read<UserCubit>().state.user!;
+              if (user.profileImageUrl.isNotEmpty) {
+                path = user.profileImageUrl;
+              }
               context.read<UserCubit>().updateProfile(
                 user.copyWith(
                   name: nameController.text,
                   username: userNameController.text,
                   bio: bioController.text,
+                  profileImageUrl: path,
                 ),
               );
+              showSuccessSnackBar(context, "Profile updated successfully");
             },
             child: Text("Update Profile"),
           ),

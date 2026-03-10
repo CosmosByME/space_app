@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:space_app/data/models/user.dart';
-import 'package:space_app/domain/models/user_model.dart';
+import 'package:space_app/domain/models/user.dart';
+import 'package:space_app/data/models/user_model.dart';
 
 void main() {
   group('UserModel', () {

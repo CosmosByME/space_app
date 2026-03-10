@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:space_app/data/services/token_service.dart';
+import 'package:space_app/domain/services/token_service.dart';
 
 class AuthService {
   static final _auth = FirebaseAuth.instance;

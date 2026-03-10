@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/data/services/auth_service.dart';
-import 'package:space_app/data/services/token_service.dart';
-import 'package:space_app/domain/models/user_model.dart';
-import 'package:space_app/domain/repository/user_repository_impl.dart';
+import 'package:space_app/domain/services/auth_service.dart';
+import 'package:space_app/domain/services/token_service.dart';
+import 'package:space_app/data/models/user_model.dart';
+import 'package:space_app/data/repository/user_repository_impl.dart';
 import 'package:space_app/presentation/components/snack_bars.dart';
 import 'package:space_app/presentation/features/auth/sign_up/validator.dart';
 import 'package:space_app/presentation/features/home/home_page.dart';

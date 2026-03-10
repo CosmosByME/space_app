@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:space_app/data/repository/user_repository.dart';
-import 'package:space_app/domain/models/user_model.dart';
+import 'package:space_app/domain/repository/user_repository.dart';
+import 'package:space_app/data/models/user_model.dart';
 
 class UserRepositoryImpl extends UserRepository {
   @override

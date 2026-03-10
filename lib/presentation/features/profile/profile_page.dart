@@ -1,14 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_app/data/services/token_service.dart';
+import 'package:space_app/data/models/user_model.dart';
 import 'package:space_app/presentation/features/profile/all_posts.dart';
 import 'package:space_app/presentation/features/profile/cubit/cubit/user_cubit.dart';
 import 'package:space_app/presentation/features/profile/cubit/profile_option_cubit.dart';
+import 'package:space_app/presentation/features/profile/default_profile.dart';
 import 'package:space_app/presentation/features/profile/profile_info.dart';
 import 'package:space_app/presentation/features/profile/profile_update.dart';
 import 'package:space_app/presentation/features/profile/saved_posts.dart';
 import 'package:space_app/presentation/features/profile/tab_bar.dart';
+
+class ProfilePageWrapper extends StatelessWidget {
+  const ProfilePageWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => UserCubit(), child: ProfilePage());
+  }
+}
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -24,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    context.read<UserCubit>().getUser();
   }
 
   @override
@@ -49,6 +60,14 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, currentIndex) {
           return BlocBuilder<UserCubit, UserState>(
             builder: (context, state) {
+              if (state.state == StateEnum.loading ||
+                  state.state == StateEnum.initial) {
+                return DefaultProfile();
+              }
+
+              if (state.state == StateEnum.error) {
+                return Center(child: Text('Error: ${state.error}'));
+              }
               return StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('users')
@@ -60,19 +79,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                   if (asyncSnapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return DefaultProfile();
                   }
-                  // final user = UserModel.fromMap(asyncSnapshot.data!.data()!);
+                  final user = UserModel.fromMap(asyncSnapshot.data!.data()!);
                   return CustomScrollView(
                     slivers: [
                       SliverAppBar(
                         backgroundColor: Colors.transparent,
                         stretch: true,
                         pinned: true,
-                        expandedHeight: 230,
+                        expandedHeight: 260,
                         toolbarHeight: 0,
                         flexibleSpace: FlexibleSpaceBar(
-                          background: ProfileInfo(),
+                          background: ProfileInfo(user: user),
                           stretchModes: [
                             StretchMode.zoomBackground,
                             StretchMode.fadeTitle,

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:space_app/data/services/img_picker_service.dart';
+import 'package:space_app/domain/services/img_picker_service.dart';
 import 'package:space_app/presentation/components/icons.dart';
 
 class AddPost extends StatefulWidget {
