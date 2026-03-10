@@ -31,7 +31,7 @@ class AuthService {
     }
   }
 
-  static void logOut() async {
+  static Future<void> logOut() async {
     await _auth.signOut();
     TokenService.deleteToken();
   }

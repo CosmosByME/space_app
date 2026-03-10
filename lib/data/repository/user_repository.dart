@@ -1,6 +1,8 @@
 import 'package:space_app/data/models/user.dart';
+import 'package:space_app/domain/models/user_model.dart';
 
 abstract class UserRepository {
+  Future<void> addUser(UserModel user);
   Future<User?> loadUser(String uid);
-  Future<void> updateUser(User user);
+  Future<void> updateUser(UserModel user);
 }

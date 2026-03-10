@@ -5,6 +5,7 @@ import 'package:space_app/presentation/components/custom_text_field.dart';
 import 'package:space_app/presentation/components/icons.dart';
 import 'package:space_app/presentation/components/other_method_button.dart';
 import 'package:space_app/presentation/components/snack_bars.dart';
+import 'package:space_app/presentation/features/auth/login/login_page.dart';
 import 'package:space_app/presentation/features/auth/sign_up/sign_up_action.dart';
 import 'package:space_app/presentation/theme/colors.dart';
 
@@ -49,7 +50,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   InkWell(
                     onTap: () {
-                      //Navigate to login Page
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
                     },
                     child: OtherMethodsButton(
                       icon: AppIcons.emailIcon,
@@ -192,7 +200,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text("Have an account? "),
                   TextButton(
                     onPressed: () {
-                      //Navigate to login Page
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
                     },
                     child: Text(
                       "Log In",

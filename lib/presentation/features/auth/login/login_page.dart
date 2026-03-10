@@ -6,6 +6,7 @@ import 'package:space_app/presentation/components/icons.dart';
 import 'package:space_app/presentation/components/other_method_button.dart';
 import 'package:space_app/presentation/components/snack_bars.dart';
 import 'package:space_app/presentation/features/auth/login/login_action.dart';
+import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
 import 'package:space_app/presentation/theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,7 +47,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   InkWell(
                     onTap: () {
-                      //Navigate to sign up page
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpPage();
+                          },
+                        ),
+                      );
                     },
                     child: OtherMethodsButton(
                       icon: AppIcons.emailIcon,
@@ -157,10 +165,17 @@ class _LoginPageState extends State<LoginPage> {
                   Text("Don't have an account? "),
                   TextButton(
                     onPressed: () {
-                      //Navigate to login page
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpPage();
+                          },
+                        ),
+                      );
                     },
                     child: Text(
-                      "Log In",
+                      "Sign up",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

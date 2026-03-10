@@ -3,6 +3,7 @@ import 'package:space_app/data/services/auth_service.dart';
 import 'package:space_app/data/services/token_service.dart';
 import 'package:space_app/presentation/components/snack_bars.dart';
 import 'package:space_app/presentation/features/auth/login/validator.dart';
+import 'package:space_app/presentation/features/home/home_page.dart';
 
 Future<bool> handleLoginAction(
   BuildContext context,
@@ -14,6 +15,14 @@ Future<bool> handleLoginAction(
     if (response != null) {
       showSuccessSnackBar(context, "Logged in successfully");
       TokenService.writeToken(response);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return HomePage();
+          },
+        ),
+      );
       return true;
     } else {
       showErrorSnackBar(context, "Email or password is incorrect");

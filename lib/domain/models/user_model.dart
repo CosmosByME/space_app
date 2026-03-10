@@ -1,7 +1,7 @@
 import 'package:space_app/data/models/user.dart';
 
 class UserModel extends User {
-  UserModel({
+  const UserModel({
     required super.uid,
     required super.name,
     required super.email,
@@ -42,5 +42,32 @@ class UserModel extends User {
       'postsCount': postsCount,
       'createdAt': createdAt.toIso8601String(),
     };
+  }
+
+  @override
+  UserModel copyWith({
+    String? uid,
+    String? name,
+    String? email,
+    String? username,
+    String? bio,
+    String? profileImageUrl,
+    int? followersCount,
+    int? followingCount,
+    int? postsCount,
+    DateTime? createdAt,
+  }) {
+    return UserModel(
+      uid: uid ?? this.uid,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      username: username ?? this.username,
+      bio: bio ?? this.bio,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      followersCount: followersCount ?? this.followersCount,
+      followingCount: followingCount ?? this.followingCount,
+      postsCount: postsCount ?? this.postsCount,
+      createdAt: createdAt ?? this.createdAt,
+    );
   }
 }

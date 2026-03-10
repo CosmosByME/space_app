@@ -1,16 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
+import 'package:space_app/presentation/features/home/home_page.dart';
 import 'package:space_app/presentation/features/home/page_index_cubit.dart';
 import 'package:space_app/firebase_options.dart';
-import 'package:space_app/presentation/components/app_bar.dart';
-import 'package:space_app/presentation/components/bottom_app_bar.dart';
-import 'package:space_app/presentation/features/auth/login/login_page.dart';
-// import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
-import 'package:space_app/presentation/features/feed/feed_page.dart';
-import 'package:space_app/presentation/features/notifications/notification_page.dart';
-import 'package:space_app/presentation/features/profile/cubit/profile_option_cubit.dart';
-import 'package:space_app/presentation/features/profile/profile_page.dart';
-import 'package:space_app/presentation/features/search/search_page.dart';
 import 'package:space_app/presentation/theme/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,55 +26,18 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       home: BlocProvider(
         create: (context) => PageIndexCubit(),
-        child: LoginPage(),
+        child: pageSelector(),
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  PageController pageController = PageController();
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PageIndexCubit, int>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: CustomAppBar(),
-          body: RefreshIndicator.adaptive(
-            onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 1));
-            },
-            child: PageView(
-              onPageChanged: (index) {
-                context.read<PageIndexCubit>().changeIndex(index);
-              },
-              controller: pageController,
-              children: [
-                FeedPage(),
-                SearchPage(),
-                NotificationPage(),
-                BlocProvider(
-                  create: (context) => ProfileOptionCubit(),
-                  child: ProfilePage(),
-                ),
-              ],
-            ),
-          ),
-          bottomNavigationBar: CustomBottomAppBar(
-            pageController: pageController,
-          ),
-        );
-      },
-    );
+Widget pageSelector() {
+  final auth = FirebaseAuth.instance;
+  if (auth.currentUser != null) {
+    return MyHomePage(title: "Space App");
+  } else {
+    return SignUpPage();
   }
 }
 

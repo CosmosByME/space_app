@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_app/data/services/img_picker_service.dart';
 import 'package:space_app/presentation/components/icons.dart';
+import 'package:space_app/presentation/features/profile/cubit/cubit/user_cubit.dart';
 import 'package:space_app/presentation/theme/colors.dart';
 
 class ProfileUpdate extends StatefulWidget {
@@ -14,6 +17,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   TextEditingController nameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
+  late File file;
   int selectedTab = 0;
 
   @override
@@ -26,6 +30,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = context.read<UserCubit>().state.user!.name;
+    userNameController.text = context.read<UserCubit>().state.user!.username;
+    bioController.text = context.read<UserCubit>().state.user!.bio;
     return Column(
       children: [
         // Sub-tab bar: General / Account / Logout
@@ -88,7 +95,11 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
         children: [
           // Avatar upload
           GestureDetector(
-            onTap: () => ImgPickerService.pickImage(),
+            onTap: () {
+              ImgPickerService.pickImage().then((value) {
+                file = value!;
+              });
+            },
             child: Container(
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.only(bottom: 16),
@@ -195,7 +206,16 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              final user = context.read<UserCubit>().state.user!;
+              context.read<UserCubit>().updateProfile(
+                user.copyWith(
+                  name: nameController.text,
+                  username: userNameController.text,
+                  bio: bioController.text,
+                ),
+              );
+            },
             child: Text("Update Profile"),
           ),
         ],
@@ -301,7 +321,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.read<UserCubit>().logOutUser(context);
+              },
               child: Text("Log Out"),
             ),
           ),

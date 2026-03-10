@@ -10,7 +10,7 @@ class User {
   final int postsCount;
   final DateTime createdAt;
 
-  User({
+  const User({
     required this.uid,
     required this.name,
     required this.email,
@@ -22,4 +22,30 @@ class User {
     required this.postsCount,
     required this.createdAt,
   });
+
+  User copyWith({
+    String? uid,
+    String? name,
+    String? email,
+    String? username,
+    String? bio,
+    String? profileImageUrl,
+    int? followersCount,
+    int? followingCount,
+    int? postsCount,
+    DateTime? createdAt,
+  }) {
+    return User(
+      uid: uid ?? this.uid,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      username: username ?? this.username,
+      bio: bio ?? this.bio,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      followersCount: followersCount ?? this.followersCount,
+      followingCount: followingCount ?? this.followingCount,
+      postsCount: postsCount ?? this.postsCount,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
