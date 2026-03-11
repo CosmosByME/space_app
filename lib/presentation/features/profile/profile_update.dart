@@ -267,12 +267,12 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               ),
             ),
             onPressed: () async {
-              if (file != null) {
-                path = await SupabaseStorageService.uploadUserImage(file!);
-              }
               final user = context.read<UserCubit>().state.user!;
               if (user.profileImageUrl.isNotEmpty) {
                 path = user.profileImageUrl;
+              }
+              if (file != null) {
+                path = await SupabaseStorageService.uploadUserImage(file!);
               }
               context.read<UserCubit>().updateProfile(
                 user.copyWith(
