@@ -27,7 +27,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: LogoContainer(), centerTitle: true),
@@ -173,7 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 50,
                 decoration: BoxDecoration(
                   color: isAgree
-                      ? AppColors.neutralB900
+                      ? AppColors.primaryB900
                       : AppColors.neutralB100,
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -214,7 +213,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.neutralB900,
                       ),
                     ),
                   ),

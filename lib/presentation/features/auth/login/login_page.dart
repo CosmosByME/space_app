@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: LogoContainer(), centerTitle: true),
@@ -139,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: AppColors.neutralB900,
+                  color: AppColors.primaryB900,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 alignment: Alignment.center,
@@ -179,7 +178,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.neutralB900,
                       ),
                     ),
                   ),

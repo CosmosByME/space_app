@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:space_app/domain/models/user.dart';
 
 class UserModel extends User {
-  const UserModel({
+  UserModel({
     required super.uid,
     required super.name,
     required super.email,

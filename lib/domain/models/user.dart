@@ -9,9 +9,9 @@ class User {
   final int followingCount;
   final int postsCount;
   final DateTime createdAt;
-  final bool followed;
+  bool followed;
 
-  const User({
+  User({
     required this.uid,
     required this.name,
     required this.email,

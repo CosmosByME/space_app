@@ -24,7 +24,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: AppColors.neutralB100),
       ),

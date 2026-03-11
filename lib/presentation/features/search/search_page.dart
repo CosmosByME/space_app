@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:space_app/data/models/user_model.dart';
+import 'package:space_app/domain/services/follow_unfollow_service.dart';
+import 'package:space_app/domain/services/search_service.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -9,6 +12,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   TextEditingController search = TextEditingController();
+  List<UserModel> users = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +34,20 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    SearchService.searchUsers(value).then((value) {
+                      users = value;
+                    });
+                  });
+                },
               ),
             ),
           ),
           SliverList.builder(
-            itemCount: 5,
+            itemCount: users.length,
             itemBuilder: (context, index) {
-              return UserTile();
+              return UserTile(user: users[index]);
             },
           ),
         ],
@@ -46,14 +57,14 @@ class _SearchPageState extends State<SearchPage> {
 }
 
 class UserTile extends StatefulWidget {
-  const UserTile({super.key});
+  final UserModel user;
+  const UserTile({super.key, required this.user});
 
   @override
   State<UserTile> createState() => _UserTileState();
 }
 
 class _UserTileState extends State<UserTile> {
-  bool isFollowed = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,21 +80,28 @@ class _UserTileState extends State<UserTile> {
             margin: EdgeInsets.only(right: 8),
             child: CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage("assets/images/profile_pic.png"),
+              backgroundImage: widget.user.profileImageUrl.isEmpty
+                  ? const AssetImage("assets/images/profile_pic.png")
+                  : NetworkImage(widget.user.profileImageUrl),
             ),
           ),
-          Text("Username"),
+          Text(widget.user.username),
           Expanded(child: SizedBox()),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: isFollowed ? Colors.grey : Colors.blue,
+              backgroundColor: widget.user.followed ? Colors.grey : Colors.blue,
             ),
             onPressed: () {
               setState(() {
-                isFollowed = !isFollowed;
+                widget.user.followed = !widget.user.followed;
+                if (widget.user.followed) {
+                  FollowUnfollowService.follow(widget.user);
+                } else {
+                  FollowUnfollowService.unfollow(widget.user);
+                }
               });
             },
-            child: Text(isFollowed ? "Unfollow" : "Follow"),
+            child: Text(widget.user.followed ? "Unfollow" : "Follow"),
           ),
         ],
       ),
