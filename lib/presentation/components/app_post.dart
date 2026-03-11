@@ -24,7 +24,7 @@ class _AppPostState extends State<AppPost> {
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -39,7 +39,12 @@ class _AppPostState extends State<AppPost> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(40),
-                      child: CircleAvatar(radius: 20, child: profile),
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage(
+                          "assets/images/profile_pic.png",
+                        ),
+                      ),
                     ),
                     SizedBox(width: 10),
                     Column(

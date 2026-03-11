@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/presentation/components/icons.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -29,7 +28,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: CustomScrollView(
@@ -97,14 +96,14 @@ class UserNotificationTile extends StatelessWidget {
       ),
       child: Container(
         margin: EdgeInsets.all(15),
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
               margin: EdgeInsets.only(right: 8),
               child: CircleAvatar(
                 radius: 20,
-                child: AppIcons.userIconUnSelected,
+                backgroundImage: AssetImage("assets/images/profile_pic.png"),
               ),
             ),
             Column(

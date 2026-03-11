@@ -26,7 +26,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
           border: Border(
             top: BorderSide(color: AppColors.neutralB100, width: 0.5),
           ),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(16),
             bottomRight: Radius.circular(16),

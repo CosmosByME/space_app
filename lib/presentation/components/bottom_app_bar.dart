@@ -21,7 +21,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
       },
       builder: (context, state) {
         return BottomAppBar(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           height: 58,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -31,32 +31,64 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   context.read<PageIndexCubit>().changeIndex(0);
                 },
                 child: index == 0
-                    ? SizedBox(child: AppIcons.homeIconSelected)
-                    : SizedBox(child: AppIcons.homeIconUnSelected),
+                    ? SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: AppIcons.homeIconSelected,
+                      )
+                    : SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: AppIcons.homeIconUnSelected,
+                      ),
               ),
               GestureDetector(
                 onTap: () {
                   context.read<PageIndexCubit>().changeIndex(1);
                 },
                 child: index == 1
-                    ? SizedBox(child: AppIcons.searchIconSelected)
-                    : SizedBox(child: AppIcons.searchIconUnSelected),
+                    ? SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: AppIcons.searchIconSelected,
+                      )
+                    : SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: AppIcons.searchIconUnSelected,
+                      ),
               ),
               GestureDetector(
                 onTap: () {
                   context.read<PageIndexCubit>().changeIndex(2);
                 },
                 child: index == 2
-                    ? SizedBox(child: AppIcons.notificationIconSelected)
-                    : SizedBox(child: AppIcons.notificationIconUnSelected),
+                    ? SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: AppIcons.notificationIconSelected,
+                      )
+                    : SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: AppIcons.notificationIconUnSelected,
+                      ),
               ),
               GestureDetector(
                 onTap: () {
                   context.read<PageIndexCubit>().changeIndex(3);
                 },
                 child: index == 3
-                    ? SizedBox(child: AppIcons.userIconSelected)
-                    : SizedBox(child: AppIcons.userIconUnSelected),
+                    ? SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: AppIcons.userIconSelected,
+                      )
+                    : SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: AppIcons.userIconUnSelected,
+                      ),
               ),
             ],
           ),

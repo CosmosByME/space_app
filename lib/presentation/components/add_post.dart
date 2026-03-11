@@ -18,7 +18,7 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(10),
       ),
       width: MediaQuery.of(context).size.width,
@@ -39,6 +39,9 @@ class _AddPostState extends State<AddPost> {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "What's on your mind?",
+              hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
           ),
           Divider(),

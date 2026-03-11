@@ -6,6 +6,18 @@ import 'package:space_app/presentation/theme/text_theme.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      colorScheme: ColorScheme(
+        surface: Colors.white,
+        onSurface: AppColors.neutralB400,
+        brightness: Brightness.light,
+        primary: AppColors.primaryB900,
+        onPrimary: AppColors.neutralB400,
+        secondary: AppColors.primaryB900,
+        onSecondary: AppColors.neutralB400,
+        error: Colors.red,
+        onError: AppColors.neutralB400,
+        surfaceTint: AppColors.neutralB400,
+      ),
       brightness: Brightness.light,
       primaryColor: AppColors.primaryB900,
       scaffoldBackgroundColor: AppColors.primaryB100,
@@ -37,9 +49,21 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
+      colorScheme: ColorScheme(
+        surface: AppColors.neutralB900,
+        onSurface: AppColors.neutralW400,
+        brightness: Brightness.dark,
+        primary: AppColors.primaryB900,
+        onPrimary: AppColors.neutralW400,
+        secondary: AppColors.primaryB900,
+        onSecondary: AppColors.neutralW400,
+        error: Colors.red,
+        onError: AppColors.neutralW400,
+        surfaceTint: AppColors.neutralW400,
+      ),
       brightness: Brightness.dark,
       primaryColor: AppColors.primaryB900,
-      scaffoldBackgroundColor: AppColors.neutralB900,
+      scaffoldBackgroundColor: AppColors.neutralB800,
       textTheme: AppTextTheme.darkTextTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

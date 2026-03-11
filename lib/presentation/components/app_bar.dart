@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:space_app/presentation/components/icons.dart';
-import 'package:space_app/presentation/theme/text_theme.dart';
 
 class CustomAppBar extends AppBar {
   CustomAppBar({super.key})
@@ -27,9 +26,9 @@ class LogoContainer extends StatelessWidget {
           AppIcons.logoIcon,
           Text(
             'StellarHub',
-            style: AppTextTheme.lightTextTheme.displaySmall?.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w800),
           ),
         ],
       ),

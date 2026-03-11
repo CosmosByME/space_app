@@ -43,7 +43,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           padding: EdgeInsets.symmetric(vertical: 4),
           margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -71,13 +71,13 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryB100 : Colors.transparent,
+          color: isSelected ? AppColors.primaryB500 : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isSelected ? AppColors.primaryB900 : AppColors.neutralB500,
+            color: isSelected ? Colors.white : AppColors.neutralB500,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
           ),
         ),
@@ -90,7 +90,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -296,7 +296,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -363,7 +363,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
       padding: EdgeInsets.all(24),
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -372,9 +372,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           SizedBox(height: 16),
           Text(
             "Are you sure you want to log out?",
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: AppColors.neutralB500),
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 24),

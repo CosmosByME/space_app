@@ -17,7 +17,7 @@ class ProfileHeader extends StatelessWidget {
       ),
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

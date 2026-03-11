@@ -88,25 +88,25 @@ class AppIcons {
     home,
     height: 24,
     width: 24,
-    colorFilter: ColorFilter.mode(AppColors.neutralB900, BlendMode.srcIn),
+    colorFilter: ColorFilter.mode(AppColors.primaryB900, BlendMode.srcIn),
   );
   static SvgPicture get searchIconSelected => SvgPicture.asset(
     search,
     height: 24,
     width: 24,
-    colorFilter: ColorFilter.mode(AppColors.neutralB900, BlendMode.srcIn),
+    colorFilter: ColorFilter.mode(AppColors.primaryB900, BlendMode.srcIn),
   );
   static SvgPicture get notificationIconSelected => SvgPicture.asset(
     notification,
     height: 24,
     width: 24,
-    colorFilter: ColorFilter.mode(AppColors.neutralB900, BlendMode.srcIn),
+    colorFilter: ColorFilter.mode(AppColors.primaryB900, BlendMode.srcIn),
   );
   static SvgPicture get userIconSelected => SvgPicture.asset(
     user,
     height: 24,
     width: 24,
-    colorFilter: ColorFilter.mode(AppColors.neutralB900, BlendMode.srcIn),
+    colorFilter: ColorFilter.mode(AppColors.primaryB900, BlendMode.srcIn),
   );
 
   static SvgPicture get homeIconUnSelected => SvgPicture.asset(

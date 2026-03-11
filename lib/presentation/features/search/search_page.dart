@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/presentation/components/icons.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -20,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
               margin: EdgeInsets.all(5),
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: TextField(
@@ -61,14 +60,17 @@ class _UserTileState extends State<UserTile> {
       margin: EdgeInsets.all(5),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         children: [
           Container(
             margin: EdgeInsets.only(right: 8),
-            child: CircleAvatar(radius: 20, child: AppIcons.userIconUnSelected),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage("assets/images/profile_pic.png"),
+            ),
           ),
           Text("Username"),
           Expanded(child: SizedBox()),
