@@ -35,6 +35,7 @@ class DefaultProfile extends StatelessWidget {
                   followingCount: 480,
                   postsCount: 67,
                   createdAt: DateTime.now(),
+                  followed: false,
                 ),
               ),
               stretchModes: const [

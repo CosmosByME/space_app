@@ -13,6 +13,7 @@ class UserModel extends User {
     required super.followingCount,
     required super.postsCount,
     required super.createdAt,
+    required super.followed,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +28,7 @@ class UserModel extends User {
       followingCount: json['followingCount'] as int,
       postsCount: json['postsCount'] as int,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      followed: json['followed'] as bool,
     );
   }
 
@@ -44,6 +46,7 @@ class UserModel extends User {
       createdAt: map['createdAt'] is Timestamp
           ? (map['createdAt'] as Timestamp).toDate()
           : DateTime.now(),
+      followed: map['followed'] as bool? ?? false,
     );
   }
 
@@ -59,6 +62,7 @@ class UserModel extends User {
       'followingCount': followingCount,
       'postsCount': postsCount,
       'createdAt': createdAt.toIso8601String(),
+      'followed': followed,
     };
   }
 
@@ -74,6 +78,7 @@ class UserModel extends User {
     int? followingCount,
     int? postsCount,
     DateTime? createdAt,
+    bool? followed,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -86,6 +91,7 @@ class UserModel extends User {
       followingCount: followingCount ?? this.followingCount,
       postsCount: postsCount ?? this.postsCount,
       createdAt: createdAt ?? this.createdAt,
+      followed: followed ?? this.followed,
     );
   }
 }

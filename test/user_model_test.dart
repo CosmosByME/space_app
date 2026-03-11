@@ -46,6 +46,7 @@ void main() {
         followingCount: 50,
         postsCount: 10,
         createdAt: now,
+        followed: false,
       );
 
       final result = model.toJson();

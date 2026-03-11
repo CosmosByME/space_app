@@ -30,6 +30,7 @@ Future<bool> handleSignUpAction(
         followingCount: 0,
         postsCount: 0,
         createdAt: DateTime.now(),
+        followed: false,
       );
       await repo.addUser(user);
       showSuccessSnackBar(context, "Account created successfully");

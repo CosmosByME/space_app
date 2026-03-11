@@ -9,6 +9,7 @@ class User {
   final int followingCount;
   final int postsCount;
   final DateTime createdAt;
+  final bool followed;
 
   const User({
     required this.uid,
@@ -21,6 +22,7 @@ class User {
     required this.followingCount,
     required this.postsCount,
     required this.createdAt,
+    required this.followed,
   });
 
   User copyWith({
@@ -34,6 +36,7 @@ class User {
     int? followingCount,
     int? postsCount,
     DateTime? createdAt,
+    bool? followed,
   }) {
     return User(
       uid: uid ?? this.uid,
@@ -46,6 +49,7 @@ class User {
       followingCount: followingCount ?? this.followingCount,
       postsCount: postsCount ?? this.postsCount,
       createdAt: createdAt ?? this.createdAt,
+      followed: followed ?? this.followed,
     );
   }
 }
