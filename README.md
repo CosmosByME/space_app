@@ -51,7 +51,7 @@ TODO: Add your screenshots here later
 ## 👨‍💻 About the Author
 
 <div align="center">
-  <img src="assets/images/profile_pic.png" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />
+  <img src="(https://avatars.githubusercontent.com/u/227856061?v=4)" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />
   
   **Built with ❤️ by a passionate Flutter developer.**
 </div>
