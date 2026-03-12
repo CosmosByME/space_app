@@ -51,8 +51,7 @@ TODO: Add your screenshots here later
 ## 👨‍💻 About the Author
 
 <div align="center">
-  <img src="(https://avatars.githubusercontent.com/u/227856061?v=4)" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />
-  
+  <img src="assets/images/profile_pic.png" alt="Author Profile Picture" width="150" style="border-radius: 100%;" />  
   **Built with ❤️ by a passionate Flutter developer.**
 </div>
 
@@ -82,4 +81,9 @@ TODO: Add your screenshots here later
 4. Run the app:
    ```bash
    flutter run
+   ```
+5. (IMPORTANT: If you have added Firebase Storage to your Firebase project, then skip this part. You can configure your Firebase storage service inside the file ```\lib\domain\services\supabase_storage_service.dart```)Create ```.env``` file for your API keys:
+   ```bash
+   SUPABASE_URL=YOUR_SUPABASE_URL
+   SUPABASE_SERVICE_KEY=YOUR_SUPABASE_SECRET_KEY
    ```
