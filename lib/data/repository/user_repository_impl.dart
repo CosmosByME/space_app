@@ -15,7 +15,7 @@ class UserRepositoryImpl extends UserRepository {
     final db = FirebaseFirestore.instance;
     try {
       final jsonSnapshot = await db.collection("users").doc(uid).get();
-      UserModel user = UserModel.fromJson(jsonSnapshot.data()!);
+      UserModel user = UserModel.fromMap(jsonSnapshot.data()!);
       return user;
     } on Exception catch (e) {
       debugPrint(e.toString());

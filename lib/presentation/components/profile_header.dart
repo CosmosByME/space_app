@@ -34,16 +34,24 @@ class ProfileHeader extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(38),
-                  child: user.profileImageUrl.isEmpty
-                      ? Image.asset(
-                          "assets/images/profile_pic.png",
+                  child: user.profileImageUrl.isNotEmpty &&
+                          Uri.tryParse(user.profileImageUrl)?.hasAbsolutePath == true
+                      ? Image.network(
+                          user.profileImageUrl,
                           height: 76,
                           width: 76,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              "assets/images/profile_pic.png",
+                              height: 76,
+                              width: 76,
+                              fit: BoxFit.cover,
+                            );
+                          },
                         )
-                      //Here I changed image.network to image.file
-                      : Image.network(
-                          user.profileImageUrl,
+                      : Image.asset(
+                          "assets/images/profile_pic.png",
                           height: 76,
                           width: 76,
                           fit: BoxFit.cover,

@@ -108,9 +108,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       currentIndex == 0
-                          ? AllPosts()
+                          ? const AllPosts()
                           : currentIndex == 1
-                          ? SavedPosts()
+                          ? const SavedPosts()
                           : SliverToBoxAdapter(child: ProfileUpdate()),
                     ],
                   );

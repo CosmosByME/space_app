@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:space_app/data/repository/post_repository_impl.dart';
+import 'package:space_app/domain/models/post.dart';
 import 'package:space_app/domain/services/img_picker_service.dart';
+import 'package:space_app/domain/services/supabase_storage_service.dart';
 import 'package:space_app/presentation/components/icons.dart';
+import 'package:space_app/presentation/components/snack_bars.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -38,7 +42,7 @@ class _AddPostState extends State<AddPost> {
             maxLines: null,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: "What's on your mind?",
+              hintText: "Caption",
               hintStyle: TextStyle(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -49,7 +53,28 @@ class _AddPostState extends State<AddPost> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               addMedia(),
-              ElevatedButton(onPressed: () {}, child: Text("Post")),
+              ElevatedButton(
+                onPressed: image == null
+                    ? null
+                    : () async {
+                        try {
+                          final imgUrl =
+                              await SupabaseStorageService.uploadPostImage(
+                                image!,
+                              );
+                          final post = Post(controller.text, imgUrl);
+                          await PostRepositoryImpl().addPost(post);
+                          showSuccessSnackBar(
+                            context,
+                            "Post added successfully",
+                          );
+                        } on Exception catch (e) {
+                          debugPrint(e.toString());
+                          showErrorSnackBar(context, "Something went wrong");
+                        }
+                      },
+                child: Text("Post"),
+              ),
             ],
           ),
         ],

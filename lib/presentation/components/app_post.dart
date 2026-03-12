@@ -1,21 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:space_app/data/repository/post_repository_impl.dart';
+import 'package:space_app/domain/models/post.dart';
 import 'package:space_app/presentation/components/icons.dart';
 
 class AppPost extends StatefulWidget {
-  final String image;
-  const AppPost({super.key, required this.image});
+  final Post post;
+  const AppPost({super.key, required this.post});
 
   @override
   State<AppPost> createState() => _AppPostState();
 }
 
 class _AppPostState extends State<AppPost> {
-  late String name = "J. Webb";
-  late String date = "01.03.2026";
-  late String caption = "This photo was taken by James Webb Space Telescope 🌌";
-  late bool isLiked = false;
+  late String name = widget.post.fullname;
+  late DateTime date = DateTime.parse(widget.post.date);
+  late String caption = widget.post.caption;
+  late bool isLiked = widget.post.liked;
   late SvgPicture profile = AppIcons.userIcon;
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,8 @@ class _AppPostState extends State<AppPost> {
                       borderRadius: BorderRadius.circular(40),
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundImage: AssetImage(
-                          "assets/images/profile_pic.png",
+                        backgroundImage: CachedNetworkImageProvider(
+                          widget.post.imgUser,
                         ),
                       ),
                     ),
@@ -51,13 +53,8 @@ class _AppPostState extends State<AppPost> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          name,
+                          widget.post.fullname,
                           style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          "jwebb@mail.com",
-                          style: TextStyle(fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
@@ -68,7 +65,10 @@ class _AppPostState extends State<AppPost> {
                   children: [
                     GestureDetector(onTap: () {}, child: AppIcons.moreIcon),
                     SizedBox(height: 3),
-                    Text(date, style: TextStyle(fontWeight: FontWeight.normal)),
+                    Text(
+                      timeGiver(date),
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
                   ],
                 ),
               ],
@@ -78,7 +78,7 @@ class _AppPostState extends State<AppPost> {
           SizedBox(height: 8),
           CachedNetworkImage(
             width: MediaQuery.of(context).size.width,
-            imageUrl: widget.image,
+            imageUrl: widget.post.imgPost,
             placeholder: (context, url) => SizedBox(
               height: 200,
               child: Center(child: CircularProgressIndicator()),
@@ -134,10 +134,15 @@ class _AppPostState extends State<AppPost> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("270 Likes"),
+                    Text("${widget.post.likesCount} Likes"),
                     SizedBox(width: 10),
                     GestureDetector(
                       onTap: () async {
+                        if (isLiked) {
+                          await PostRepositoryImpl().unlikePost(widget.post);
+                        } else {
+                          await PostRepositoryImpl().likePost(widget.post);
+                        }
                         setState(() {
                           isLiked = !isLiked;
                         });
@@ -163,5 +168,24 @@ class _AppPostState extends State<AppPost> {
         ],
       ),
     );
+  }
+}
+
+String timeGiver(DateTime time) {
+  final now = DateTime.now();
+  final difference = now.difference(time);
+
+  if (difference.inSeconds < 60) {
+    return "Just now";
+  } else if (difference.inMinutes < 60) {
+    return "${difference.inMinutes} minutes ago";
+  } else if (difference.inHours < 24) {
+    return "${difference.inHours} hours ago";
+  } else if (difference.inDays < 30) {
+    return "${difference.inDays} days ago";
+  } else if (difference.inDays < 365) {
+    return "${difference.inDays ~/ 30} months ago";
+  } else {
+    return "${difference.inDays ~/ 365} years ago";
   }
 }

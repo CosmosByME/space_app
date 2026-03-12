@@ -16,6 +16,7 @@ void main() {
       'followingCount': 50,
       'postsCount': 10,
       'createdAt': now.toIso8601String(),
+      'followed': false,
     };
 
     test('should be a subclass of User', () {
@@ -32,6 +33,7 @@ void main() {
       expect(model.username, 'johndoe');
       expect(model.followersCount, 100);
       expect(model.createdAt.toIso8601String(), now.toIso8601String());
+      expect(model.followed, false);
     });
 
     test('toJson should return a valid Map', () {

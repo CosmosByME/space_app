@@ -8,11 +8,9 @@ class SearchService {
   static Future<List<UserModel>> searchUsers(String query) async {
     final List<UserModel> list = [];
     final uid = await TokenService.readToken();
-    final result = await _db
-        .collection('users')
-        .where('username', isGreaterThanOrEqualTo: query)
-        .where('username', isLessThan: '${query}z')
-        .get();
+    final lowerQuery = query.toLowerCase();
+
+    final result = await _db.collection('users').get();
 
     var follow_list = await _db
         .collection("users")
@@ -21,11 +19,15 @@ class SearchService {
         .get();
 
     List<String> maps = follow_list.docs
-        .map((doc) => UserModel.fromJson(doc.data()).uid)
+        .map((doc) => doc.id)
         .toList();
 
     for (var item in result.docs) {
-      var a = UserModel.fromJson(item.data());
+      var a = UserModel.fromMap(item.data());
+      // Skip the current user
+      if (a.uid == uid) continue;
+      // Case-insensitive match
+      if (!a.username.toLowerCase().contains(lowerQuery)) continue;
       if (maps.contains(a.uid)) {
         a.followed = true;
       }
