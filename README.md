@@ -1,16 +1,85 @@
-# space_app
+<div align="center">
+  <img src="assets/images/logo.svg" alt="Space App Logo" width="200" />
 
-A new Flutter project.
+  # Space App
 
-## Getting Started
+  *A beautiful, modern, and feature-rich Flutter application for social feeds and posts.*
 
-This project is a starting point for a Flutter application.
+  <p align="center">
+    <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
+    <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
+    <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
+    <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+    <img src="https://img.shields.io/badge/BLoC-000000?style=for-the-badge&logo=flutter&logoColor=white" alt="BLoC" />
+  </p>
+</div>
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📸 Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<!-- 
+TODO: Add your screenshots here later 
+
+<div align="center">
+  <img src="path/to/screenshot1.png" alt="Screenshot 1" width="250"/>
+  &nbsp;
+  <img src="path/to/screenshot2.png" alt="Screenshot 2" width="250"/>
+  &nbsp;
+  <img src="path/to/screenshot3.png" alt="Screenshot 3" width="250"/>
+</div>
+-->
+
+## 🚀 Features
+
+- **Social Feed**: Scroll through posts seamlessly in a dynamic feed.
+- **User Authentication**: Secure login and sign-up powered by Firebase Auth.
+- **Profile Interface**: View your profile, bookmarks, and managed posts intuitively.
+- **State Management**: Robust architecture utilizing the BLoC pattern.
+- **Cloud Database**: Real-time cloud synchronization and storage via Cloud Firestore and Supabase.
+- **Polished UI/UX**: Smooth loading states using `skeletonizer` and customized standard components.
+
+## 🛠️ Tech Stack & Libraries
+
+- **Framework**: [Flutter](https://flutter.dev/) SDK `^3.10.8`
+- **State Management**: `flutter_bloc`
+- **Backend & Database**: `firebase_core`, `firebase_auth`, `cloud_firestore`, `supabase_flutter`
+- **UI Components**: `cupertino_icons`, `skeletonizer`, `cached_network_image`, `flutter_svg`
+- **Local Storage**: `shared_preferences`
+- **Environment config**: `flutter_dotenv`
+
+## 👨‍💻 About the Author
+
+<div align="center">
+  <img src="assets/images/profile_pic.png" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />
+  
+  **Built with ❤️ by a passionate Flutter developer.**
+</div>
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.10.8 or higher recommended)
+- [Dart SDK](https://dart.dev/get-dart)
+- An emulator or physical device for testing
+- Set up Firebase and Supabase instances and update configuration files and `.env` properly.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd space_app
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Run the app:
+   ```bash
+   flutter run
+   ```
