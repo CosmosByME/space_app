@@ -52,6 +52,8 @@ TODO: Add your screenshots here later
 
 <div align="center">
   <img src="assets/images/me.jpg" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />  
+
+
   **Built with ❤️ by CosmosByME.**
 </div>
 
