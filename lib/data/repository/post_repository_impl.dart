@@ -60,7 +60,7 @@ class PostRepositoryImpl implements PostRepository {
         .collection("myPosts")
         .doc(post.id)
         .delete();
-        
+
     // Decrement user's post count
     await _firestore.collection("users").doc(post.uid).update({
       "postsCount": FieldValue.increment(-1),
@@ -125,8 +125,7 @@ class PostRepositoryImpl implements PostRepository {
     }
 
     final Map<String, Post> postMap = {
-      for (var result in snapshot.docs)
-        result.id: Post.fromMap(result.data() as Map<String, dynamic>)
+      for (var result in snapshot.docs) result.id: Post.fromMap(result.data()),
     };
 
     // Keep the order from mySnapshot
@@ -199,8 +198,7 @@ class PostRepositoryImpl implements PostRepository {
 
     if (likedSnapshot.docs.isEmpty) return posts;
 
-    final likedPostIds =
-        likedSnapshot.docs.map((doc) => doc.id).toList();
+    final likedPostIds = likedSnapshot.docs.map((doc) => doc.id).toList();
 
     // Fetch the actual posts by their IDs
     var querySnapshot = _firestore
@@ -246,10 +244,7 @@ class PostRepositoryImpl implements PostRepository {
         .doc(uid)
         .collection("likedPosts")
         .doc(post.id)
-        .set({
-      'postId': post.id,
-      'likedAt': FieldValue.serverTimestamp(),
-    });
+        .set({'postId': post.id, 'likedAt': FieldValue.serverTimestamp()});
   }
 
   @override

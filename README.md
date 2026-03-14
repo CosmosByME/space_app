@@ -18,23 +18,35 @@
 
 ## 📸 Screenshots
 
-<!-- 
-TODO: Add your screenshots here later 
-
 <div align="center">
-  <img src="path/to/screenshot1.png" alt="Screenshot 1" width="250"/>
+  <img src="assets/images/home_page.jpg" alt="Home Page" width="230"/>
   &nbsp;
-  <img src="path/to/screenshot2.png" alt="Screenshot 2" width="250"/>
+  <img src="assets/images/search_page.jpg" alt="Search Page" width="230"/>
   &nbsp;
-  <img src="path/to/screenshot3.png" alt="Screenshot 3" width="250"/>
+  <img src="assets/images/notification_page.jpg" alt="Notification Page" width="230"/>
 </div>
--->
+<br>
+<div align="center">
+  <img src="assets/images/Profile_page.jpg" alt="Profile Page" width="230"/>
+  &nbsp;
+  <img src="assets/images/Profile_update.jpg" alt="Profile Update" width="230"/>
+  &nbsp;
+  <img src="assets/images/Account_info.jpg" alt="Account Info" width="230"/>
+</div>
+<br>
+<div align="center">
+  <img src="assets/images/Log_in.jpg" alt="Login Page" width="230"/>
+  &nbsp;
+  <img src="assets/images/Log_Out.jpg" alt="Logout Dialog" width="230"/>
+</div>
 
 ## 🚀 Features
 
 - **Social Feed**: Scroll through posts seamlessly in a dynamic feed.
-- **User Authentication**: Secure login and sign-up powered by Firebase Auth.
-- **Profile Interface**: View your profile, bookmarks, and managed posts intuitively.
+- **User Authentication**: Secure email login, sign-up, and **Google Sign-In** powered by Firebase Auth.
+- **Following System**: Follow and unfollow users, building your customized feed.
+- **Engagement**: Like, comment on, and save posts to your personal collections.
+- **Profile Interface**: View your profile, followers, bookmarks, and managed posts intuitively.
 - **State Management**: Robust architecture utilizing the BLoC pattern.
 - **Cloud Database**: Real-time cloud synchronization and storage via Cloud Firestore and Supabase.
 - **Polished UI/UX**: Smooth loading states using `skeletonizer` and customized standard components.
@@ -44,6 +56,7 @@ TODO: Add your screenshots here later
 - **Framework**: [Flutter](https://flutter.dev/) SDK `^3.10.8`
 - **State Management**: `flutter_bloc`
 - **Backend & Database**: `firebase_core`, `firebase_auth`, `cloud_firestore`, `supabase_flutter`
+- **Authentication**: `google_sign_in`
 - **UI Components**: `cupertino_icons`, `skeletonizer`, `cached_network_image`, `flutter_svg`
 - **Local Storage**: `shared_preferences`
 - **Environment config**: `flutter_dotenv`
@@ -64,37 +77,62 @@ TODO: Add your screenshots here later
 - [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.10.8 or higher recommended)
 - [Dart SDK](https://dart.dev/get-dart)
 - An emulator or physical device for testing
-- Set up Firebase and Supabase instances and update configuration files and `.env` properly.
+- A Firebase Project and a Supabase Project.
 
-### Installation
+### Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
    cd space_app
-
-(IMPORTANT: If you have added Firebase Storage to your Firebase project, then skip step 3. You can configure your Firebase storage service inside the file ```\lib\domain\services\supabase_storage_service.dart```)
-
-3. Create ```.env``` file for your API keys:
-   ```bash
-   SUPABASE_URL=YOUR_SUPABASE_URL
-   SUPABASE_SERVICE_KEY=YOUR_SUPABASE_SECRET_KEY
    ```
-4. Install dependencies:
+
+2. **Install Dependencies**:
    ```bash
    flutter pub get
    ```
 
-
-5. Configure your Firebase project:
+3. **Configure Environment**:
+   Create a `.env` file in the root directory:
    ```bash
-   flutterfire configure
+   SUPABASE_URL=YOUR_SUPABASE_URL
+   SUPABASE_SERVICE_KEY=YOUR_SUPABASE_ANON_KEY
    ```
-6. Run the app:
+
+4. **Firebase Setup**:
+   - Run `flutterfire configure` to generate `firebase_options.dart`.
+   - Download and place `google-services.json` in `android/app/`.
+   - Download and place `GoogleService-Info.plist` in `ios/Runner/`.
+
+5. **Google Sign-In Configuration**:
+
+   #### 🤖 Android Setup
+   To enable Google Sign-In, you must add your SHA fingerprints to the Firebase Console:
+   - Run this command in your terminal to get the SHA-1 and SHA-256 keys:
+     ```powershell
+     ./gradlew signingReport
+     ```
+   - Copy the **SHA-1** and **SHA-256** from the `debug` variant.
+   - Go to **Firebase Console** > **Project Settings** > **General**, select your Android app, and add the fingerprints.
+
+   #### 🍎 iOS Setup
+   - Open `ios/Runner/Info.plist`.
+   - Locate or add the `CFBundleURLTypes` key and add your **REVERSED_CLIENT_ID** (found in `GoogleService-Info.plist`):
+     ```xml
+     <key>CFBundleURLTypes</key>
+     <array>
+         <dict>
+             <key>CFBundleTypeRole</key>
+             <string>Editor</string>
+             <key>CFBundleURLSchemes</key>
+             <array>
+                 <string>com.googleusercontent.apps.YOUR_CLIENT_ID</string>
+             </array>
+         </dict>
+     </array>
+     ```
+
+6. **Run the app**:
    ```bash
    flutter run
    ```
-

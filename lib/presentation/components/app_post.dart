@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:space_app/data/repository/post_repository_impl.dart';
@@ -45,7 +46,7 @@ class _AppPostState extends State<AppPost> {
                         radius: 20,
                         backgroundImage: widget.post.imgUser.isEmpty
                             ? const AssetImage("assets/images/profile_pic.png")
-                                as ImageProvider
+                                  as ImageProvider
                             : CachedNetworkImageProvider(widget.post.imgUser),
                       ),
                     ),
@@ -64,7 +65,23 @@ class _AppPostState extends State<AppPost> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    GestureDetector(onTap: () {}, child: AppIcons.moreIcon),
+                    PopupMenuButton(
+                      surfaceTintColor: Theme.of(context).colorScheme.secondary,
+                      itemBuilder: (context) {
+                        return [
+                          if (widget.post.uid ==
+                              FirebaseAuth.instance.currentUser!.uid)
+                            PopupMenuItem(value: 1, child: Text("Delete")),
+                          PopupMenuItem(value: 2, child: Text("Save")),
+                        ];
+                      },
+                      child: AppIcons.moreIcon,
+                      onSelected: (value) {
+                        if (value == 1) {
+                          PostRepositoryImpl().deletePost(widget.post);
+                        }
+                      },
+                    ),
                     SizedBox(height: 3),
                     Text(
                       timeGiver(date),

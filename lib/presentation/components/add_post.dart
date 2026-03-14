@@ -16,6 +16,7 @@ class AddPost extends StatefulWidget {
 }
 
 class _AddPostState extends State<AddPost> {
+  bool isLoading = false;
   TextEditingController controller = TextEditingController();
   File? image;
   @override
@@ -111,6 +112,9 @@ class _AddPostState extends State<AddPost> {
                     ? null
                     : () async {
                         try {
+                          setState(() {
+                            isLoading = true;
+                          });
                           final imgUrl =
                               await SupabaseStorageService.uploadPostImage(
                                 image!,
@@ -128,9 +132,10 @@ class _AddPostState extends State<AddPost> {
                         setState(() {
                           controller.clear();
                           image = null;
+                          isLoading = false;
                         });
                       },
-                child: Text("Post"),
+                child: isLoading ? CircularProgressIndicator() : Text("Post"),
               ),
             ],
           ),
