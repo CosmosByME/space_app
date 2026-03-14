@@ -4,7 +4,7 @@ import 'package:space_app/presentation/components/custom_password_field.dart';
 import 'package:space_app/presentation/components/custom_text_field.dart';
 import 'package:space_app/presentation/components/icons.dart';
 import 'package:space_app/presentation/components/other_method_button.dart';
-import 'package:space_app/presentation/components/snack_bars.dart';
+import 'package:space_app/presentation/features/auth/google_sign_in_action.dart';
 import 'package:space_app/presentation/features/auth/login/login_action.dart';
 import 'package:space_app/presentation/features/auth/sign_up/sign_up_page.dart';
 import 'package:space_app/presentation/theme/colors.dart';
@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
+  bool isGoogleLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +34,23 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () {
-                      showWarningSnackBar(
-                        context,
-                        "This feature is not available yet",
-                      );
+                    onTap: isGoogleLoading ? null : () async {
+                      setState(() {
+                        isGoogleLoading = true;
+                      });
+                      await handleGoogleSignInAction(context);
+                      if (mounted) {
+                        setState(() {
+                          isGoogleLoading = false;
+                        });
+                      }
                     },
-                    child: OtherMethodsButton(
-                      icon: AppIcons.googleIcon,
-                      text: "Sign up with Google",
-                    ),
+                    child: isGoogleLoading 
+                      ? Center(child: CircularProgressIndicator()) 
+                      : OtherMethodsButton(
+                          icon: AppIcons.googleIcon,
+                          text: "Log in with Google",
+                        ),
                   ),
                   InkWell(
                     onTap: () {

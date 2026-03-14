@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '44912727159',
     projectId: 'stellarhub-3ea81',
     storageBucket: 'stellarhub-3ea81.firebasestorage.app',
+    androidClientId: '44912727159-sfc3h0n4jg0s1flqk3sn7col68188i8t.apps.googleusercontent.com',
     iosClientId: '44912727159-ha167djsk9mqa201vvgncuni40d2rteq.apps.googleusercontent.com',
     iosBundleId: 'com.example.spaceApp',
   );
@@ -74,6 +75,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '44912727159',
     projectId: 'stellarhub-3ea81',
     storageBucket: 'stellarhub-3ea81.firebasestorage.app',
+    androidClientId: '44912727159-sfc3h0n4jg0s1flqk3sn7col68188i8t.apps.googleusercontent.com',
     iosClientId: '44912727159-ha167djsk9mqa201vvgncuni40d2rteq.apps.googleusercontent.com',
     iosBundleId: 'com.example.spaceApp',
   );
@@ -87,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'stellarhub-3ea81.firebasestorage.app',
     measurementId: 'G-5D69EB47E2',
   );
+
 }

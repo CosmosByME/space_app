@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "44912727159-jbk760t0l9gkoo4avjvbu0rmitbe0f19.apps.googleusercontent.com",
+          "client_id": "44912727159-sfc3h0n4jg0s1flqk3sn7col68188i8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.space_app",
+            "certificate_hash": "65c32d4354b2c54802cc39024842a9227843935a"
+          }
+        },
+        {
+          "client_id": "44912727159-li6uqps09mbb7k7ffolcu6ihodopne3e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

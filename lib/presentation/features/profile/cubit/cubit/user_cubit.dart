@@ -32,15 +32,17 @@ class UserCubit extends Cubit<UserState> {
   Future<void> logOutUser(BuildContext context) async {
     try {
       await AuthService.logOut();
-      emit(UserState(state: StateEnum.initial));
+      // Do not emit state change here because we are about to destroy the 
+      // UserCubit provider via navigation, which causes assertion errors.
     } catch (error) {
       debugPrint(error.toString());
       emit(UserState(state: StateEnum.error, error: error as Exception));
     } finally {
       if (context.mounted) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
+          (route) => false,
         );
       }
     }
