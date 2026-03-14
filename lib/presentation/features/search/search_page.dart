@@ -34,12 +34,13 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    SearchService.searchUsers(value).then((value) {
-                      users = value;
+                onChanged: (value) async {
+                  final result = await SearchService.searchUsers(value);
+                  if (mounted) {
+                    setState(() {
+                      users = result;
                     });
-                  });
+                  }
                 },
               ),
             ),

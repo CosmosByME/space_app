@@ -1,34 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenService {
-  static final _storage = SharedPreferencesAsync();
-
   static Future<String> readToken() async {
     try {
-      final responce = await _storage.getString("uid");
-      return responce!;
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        return user.uid;
+      }
+      throw Exception("No user is currently logged in.");
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
     }
   }
 
-  static void writeToken(String token) async {
-    try {
-      await _storage.setString("uid", token);
-    } catch (e) {
-      debugPrint(e.toString());
-      rethrow;
-    }
+  static void writeToken(String token) {
+    // No longer needed, Firebase SDK handles session persistence securely.
   }
 
-  static void deleteToken() async {
-    try {
-      await _storage.remove("uid");
-    } catch (e) {
-      debugPrint(e.toString());
-      rethrow;
-    }
+  static void deleteToken() {
+    // No longer needed, Firebase SDK handles session destruction.
   }
 }

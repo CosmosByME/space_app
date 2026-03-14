@@ -43,9 +43,10 @@ class _AppPostState extends State<AppPost> {
                       borderRadius: BorderRadius.circular(40),
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundImage: CachedNetworkImageProvider(
-                          widget.post.imgUser,
-                        ),
+                        backgroundImage: widget.post.imgUser.isEmpty
+                            ? const AssetImage("assets/images/profile_pic.png")
+                                as ImageProvider
+                            : CachedNetworkImageProvider(widget.post.imgUser),
                       ),
                     ),
                     SizedBox(width: 10),

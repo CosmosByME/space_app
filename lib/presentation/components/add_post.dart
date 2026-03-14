@@ -35,7 +35,7 @@ class _AddPostState extends State<AddPost> {
                   padding: EdgeInsets.all(16),
                   margin: EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Colors.transparent,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: Theme.of(context).colorScheme.outline,
@@ -68,7 +68,9 @@ class _AddPostState extends State<AddPost> {
                                 ),
                                 child: Icon(
                                   Icons.close_rounded,
-                                  color: Theme.of(context).colorScheme.onSurface,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                                   size: 20,
                                 ),
                               ),
