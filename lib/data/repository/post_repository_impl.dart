@@ -30,6 +30,14 @@ class PostRepositoryImpl implements PostRepository {
 
     await _firestore.collection("posts").doc(post.id).set(post.toJson());
 
+    // Add reference to myPosts subcollection
+    await _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("myPosts")
+        .doc(post.id)
+        .set({'postId': post.id, 'date': post.date});
+
     // Increment user's post count
     await _firestore.collection("users").doc(uid).update({
       "postsCount": FieldValue.increment(1),
@@ -44,6 +52,19 @@ class PostRepositoryImpl implements PostRepository {
   @override
   Future<void> deletePost(Post post) async {
     await _firestore.collection("posts").doc(post.id).delete();
+
+    // Remove reference from myPosts subcollection
+    await _firestore
+        .collection("users")
+        .doc(post.uid)
+        .collection("myPosts")
+        .doc(post.id)
+        .delete();
+        
+    // Decrement user's post count
+    await _firestore.collection("users").doc(post.uid).update({
+      "postsCount": FieldValue.increment(-1),
+    });
   }
 
   @override
@@ -71,10 +92,23 @@ class PostRepositoryImpl implements PostRepository {
   Future<List<Post>> getMyPosts({int limit = 10}) async {
     String uid = _currentUid;
     List<Post> posts = [];
+
+    // Get post IDs from myPosts subcollection
+    final mySnapshot = await _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("myPosts")
+        .orderBy("date", descending: true)
+        .limit(limit)
+        .get();
+
+    if (mySnapshot.docs.isEmpty) return posts;
+
+    final myPostIds = mySnapshot.docs.map((doc) => doc.id).toList();
+
     var querySnapshot = _firestore
         .collection("posts")
-        .where("uid", isEqualTo: uid)
-        .orderBy("date", descending: true)
+        .where("id", whereIn: myPostIds)
         .limit(limit);
 
     if (lastDocument != null) {
@@ -89,15 +123,22 @@ class PostRepositoryImpl implements PostRepository {
     if (snapshot.docs.isNotEmpty) {
       lastDocument = snapshot.docs.last;
     }
-    for (var result in snapshot.docs) {
-      Post post = Post.fromJson(result.data());
-      if (post.uid == uid) {
+
+    final Map<String, Post> postMap = {
+      for (var result in snapshot.docs)
+        result.id: Post.fromMap(result.data() as Map<String, dynamic>)
+    };
+
+    // Keep the order from mySnapshot
+    for (var id in myPostIds) {
+      final post = postMap[id];
+      if (post != null) {
         post.mine = true;
+        if (await isPostLiked(post.id)) {
+          post.liked = true;
+        }
+        posts.add(post);
       }
-      if (await isPostLiked(post.id)) {
-        post.liked = true;
-      }
-      posts.add(post);
     }
     return posts;
   }

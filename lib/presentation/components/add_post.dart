@@ -32,9 +32,60 @@ class _AddPostState extends State<AddPost> {
         children: [
           image != null
               ? Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.file(image!, fit: BoxFit.cover),
+                  padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.outline,
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                image: FileImage(image!),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: -8,
+                            right: -8,
+                            child: IconButton(
+                              icon: Container(
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.surface,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.close_rounded,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                  size: 20,
+                                ),
+                              ),
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(),
+                              onPressed: () {
+                                setState(() {
+                                  image = null;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: SizedBox()),
+                    ],
+                  ),
                 )
               : SizedBox.shrink(),
           TextField(
@@ -72,6 +123,10 @@ class _AddPostState extends State<AddPost> {
                           debugPrint(e.toString());
                           showErrorSnackBar(context, "Something went wrong");
                         }
+                        setState(() {
+                          controller.clear();
+                          image = null;
+                        });
                       },
                 child: Text("Post"),
               ),
