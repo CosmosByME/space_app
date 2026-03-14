@@ -52,6 +52,8 @@ TODO: Add your screenshots here later
 
 <div align="center">
   <img src="assets/images/me.jpg" alt="Author Profile Picture" width="150" style="border-radius: 50%;" />  
+
+
   **Built with ❤️ by CosmosByME.**
 </div>
 
@@ -73,18 +75,20 @@ TODO: Add your screenshots here later
 2. Navigate to the project directory:
    ```bash
    cd space_app
-   ```
-3. Install dependencies:
-   ```bash
-   flutter pub get
 
-(IMPORTANT: If you have added Firebase Storage to your Firebase project, then skip step 4. You can configure your Firebase storage service inside the file ```\lib\domain\services\supabase_storage_service.dart```)
+(IMPORTANT: If you have added Firebase Storage to your Firebase project, then skip step 3. You can configure your Firebase storage service inside the file ```\lib\domain\services\supabase_storage_service.dart```)
 
-4. Create ```.env``` file for your API keys:
+3. Create ```.env``` file for your API keys:
    ```bash
    SUPABASE_URL=YOUR_SUPABASE_URL
    SUPABASE_SERVICE_KEY=YOUR_SUPABASE_SECRET_KEY
    ```
+4. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+
 5. Configure your Firebase project:
    ```bash
    flutterfire configure
